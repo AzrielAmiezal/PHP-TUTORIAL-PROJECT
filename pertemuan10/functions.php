@@ -1,0 +1,25 @@
+<?php
+
+function connection()
+{
+    return mysqli_connect('localhost', 'azrielamiezal', '991006@azriel', 'php2020');
+}
+
+function query($query)
+{
+    $conn = connection();
+
+    $result = mysqli_query($conn, $query);
+
+    //jika hasilnya 1 data
+    if (mysqli_num_rows($result) == 1) {
+        return mysqli_fetch_assoc($result);
+    }
+
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+
+    return $rows;
+}
